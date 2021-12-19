@@ -33,6 +33,7 @@
 //         - visualize them on the grafana dashboard. 
 //         - example: Capture memory and CPU resources metrics for your application and for cluster
 
+
 pipeline {
     agent any
 
