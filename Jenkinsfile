@@ -53,28 +53,28 @@ pipeline {
 
     stages{
         stage("Installing node_modules, packing and deployment"){
-            // when{
-            //     branch 'main'
-            // }
+            when{
+                branch 'main'
+            }
             stages{
-                // stage("building docker image"){
-                //     steps{
-                //         script{
-                //             dockerImage = docker.build dockerhub_repo + ":$GIT_COMMIT-build-$BUILD_NUMBER"
-                //         }
-                //     }
-                // }
-                //  stage("Pushing the docker image"){
-                //     steps{
-                //         script {
-                //             docker.withRegistry('', dockerhub_creds){
-                //                 dockerImage.push()
-                //                 dockerImage.push('latest')
-                //                 dockerImage.push('v1')
-                //             }
-                //         }
-                //     }
-                // }
+                stage("building docker image"){
+                    steps{
+                        script{
+                            dockerImage = docker.build dockerhub_repo + ":$GIT_COMMIT-build-$BUILD_NUMBER"
+                        }
+                    }
+                }
+                 stage("Pushing the docker image"){
+                    steps{
+                        script {
+                            docker.withRegistry('', dockerhub_creds){
+                                dockerImage.push()
+                                dockerImage.push('latest')
+                                dockerImage.push('v1')
+                            }
+                        }
+                    }
+                }
                  stage("Deploying"){
                     steps{
                         withKubeConfig([credentialsId: 'kube-config']){
