@@ -14,7 +14,6 @@ spec:
       containers:
       - name: note-app
         image: rahulsoni285/note-app
-        # imagePullPolicy: IfNotPresent
         env:
         - name: PORT
           value: "4000"
