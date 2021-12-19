@@ -77,10 +77,9 @@ pipeline {
                 // }
                  stage("Deploying"){
                     steps{
-                        // withKubeConfig([credentialsId: 'kube-config']){
-                        //     sh 'kubectl get all'
-                        // }
-                        sh 'kubectl get svc'
+                        withKubeConfig([credentialsId: 'kube-config']){
+                            sh 'kubectl get all'
+                        }
                     }
                 }
                 
