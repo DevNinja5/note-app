@@ -57,14 +57,14 @@ pipeline {
             }
             stages{
                 stage("building docker image"){
-                    stpes{
+                    steps{
                         script{
                             dockerImage = docker.build dockerhub_repo + ":$BUILD_NUMBER"
                         }
                     }
                 }
                  stage("Pushing the docker image"){
-                    stpes{
+                    steps{
                         script {
                             docker.withDockerRegistry('', dockerhub_creds){
                                 dockerImage.push()
@@ -73,7 +73,7 @@ pipeline {
                     }
                 }
                 //  stage(""){
-                //     stpes{
+                //     steps{
 
                 //     }
                 // }
