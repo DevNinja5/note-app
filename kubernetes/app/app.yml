@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: note-app
+spec:
+  selector:
+    matchLabels:
+      tier: main-app
+  template:
+    metadata:
+      labels:
+        tier: main-app
+    spec:
+      containers:
+      - name: note-app
+        image: rahulsoni285/note-app
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PORT
+          value: "4000"
+        - name: MONGODB_HOST
+          value: "mongodb-0.mongodb"
+        - name: MONGODB_DB
+          value: notesdb
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 4000

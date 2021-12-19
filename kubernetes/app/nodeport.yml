@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-main-app
+spec:
+  type: NodePort
+  ports:
+    - name: traffic
+      port: 4000
+      targetPort: 4000
+      nodePort: 30080
+  selector:
+      tier: main-app

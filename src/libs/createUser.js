@@ -1,16 +1,16 @@
 import User from "../models/User";
 
 export const createAdminUser = async () => {
-  const userFound = await User.findOne({ email: "admin@localhost" });
+  const userFound = await User.findOne({ email: "admin" });
 
   if (userFound) return;
 
   const newUser = new User({
     username: "admin",
-    email: "admin@localhost",
+    email: "admin",
   });
 
-  newUser.password = await newUser.encryptPassword("adminpassword");
+  newUser.password = await newUser.encryptPassword("admin");
 
   const admin = await newUser.save();
 

@@ -75,11 +75,14 @@ pipeline {
                         }
                     }
                 }
-                //  stage(""){
-                //     steps{
-
-                //     }
-                // }
+                 stage("Deploying"){
+                    steps{
+                        withKubeConfig([credentialsId: 'kube-config']){
+                            sh 'pwd && ls'
+                            sh 'kubectl get all'
+                        }
+                    }
+                }
                 
             }
         }

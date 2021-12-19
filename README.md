@@ -32,8 +32,8 @@ docker-compose up
 
 when the app is lauched, this will create an Admin user with the following credentials:
 
-- email: admin@localhost
-- password: adminpassword
+- email: admin
+- password: admin
 
 # Recursos
 
