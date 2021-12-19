@@ -1,0 +1,113 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: minikube-hostpath
+provisioner: k8s.io/minikube-hostpath
+reclaimPolicy: Delete
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  # namespace: capstone
+spec:
+  serviceName: mongodb
+  selector:
+    matchLabels:
+      app: mongodb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    
+    spec:
+      securityContext:
+        fsGroup: 1001
+      containers:
+        - name: mongodb
+          image: bitnami/mongodb
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MONGODB_DISABLE_SYSTEM_LOG
+              value: "false"
+            - name: MONGODB_SYSTEM_LOG_VERBOSITY
+              value: "1"
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MONGODB_REPLICA_SET_NAME
+              value: "replicaset"
+            - name: MONGODB_INITIAL_PRIMARY_HOST
+              value: "mongodb-0.mongodb"
+            - name: MONGODB_ADVERTISED_HOSTNAME
+              value: "$(POD_NAME).mongodb"
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "yes"
+          command:
+            - /scripts/script.sh
+          securityContext:
+            runAsUser: 1001
+          volumeMounts:
+            - name: config
+              mountPath: /scripts
+            - name: data
+              mountPath: /bitnami/mongodb
+              
+      volumes:
+        - name: config
+          configMap:
+            name: mongo-config
+            defaultMode: 0755
+            items:
+              - key: script.sh
+                path: script.sh
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: minikube-hostpath
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-config
+data:
+  script.sh: |-
+    #!/bin/bash
+    if [[ "$POD_NAME" = "mongodb-0" ]];
+    then
+    export MONGODB_REPLICA_SET_MODE="primary"
+    else
+    export MONGODB_INITIAL_PRIMARY_PORT_NUMBER="27017"
+    export MONGODB_REPLICA_SET_MODE="secondary"
+    fi
+
+    exec /opt/bitnami/scripts/mongodb/entrypoint.sh /opt/bitnami/scripts/mongodb/run.sh
+
+---
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  clusterIP: None
+  publishNotReadyAddresses: true
+  ports:
+  - name: mongodb
+    port: 27017
+    targetPort: 27017
+  selector:
+    app: mongodb
