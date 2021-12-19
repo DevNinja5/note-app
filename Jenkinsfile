@@ -46,7 +46,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '5'))
     }
     tools{
-        node 'node'
+        nodejs 'node'
         jdk 'jdk11'
     }
 
