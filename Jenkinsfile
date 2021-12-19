@@ -32,3 +32,56 @@
 //         - it should scrape the metrics from an endpoint
 //         - visualize them on the grafana dashboard. 
 //         - example: Capture memory and CPU resources metrics for your application and for cluster
+
+// added in dev branch
+
+pipeline {
+    agent any
+
+    environment{
+        dockerhub_repo = "rahulsoni285/note-app"
+        dockerhub_creds = 'dockerhub'
+        dockerImage = ''
+    }
+
+    options{
+        buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '5'))
+    }
+    tools{
+        nodejs 'node'
+        jdk 'jdk11'
+    }
+
+    stages{
+        stage("Installing node_modules, packing and deployment"){
+            when{
+                branch 'main'
+            }
+            stages{
+                stage("building docker image"){
+                    steps{
+                        script{
+                            dockerImage = docker.build dockerhub_repo + ":$GIT_COMMIT-build-$BUILD_NUMBER"
+                        }
+                    }
+                }
+                 stage("Pushing the docker image"){
+                    steps{
+                        script {
+                            docker.withRegistry('', dockerhub_creds){
+                                dockerImage.push()
+                                dockerImage.push('latest')
+                            }
+                        }
+                    }
+                }
+                //  stage(""){
+                //     steps{
+
+                //     }
+                // }
+                
+            }
+        }
+    }
+}
