@@ -1,0 +1,7 @@
+---
+# vars file for role/install
+jenkins_key: "https://pkg.jenkins.io/debian-stable/jenkins.io.key"
+
+jenkins:
+  name: "Jenkins"
+  url: "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ "

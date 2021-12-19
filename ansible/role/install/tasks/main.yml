@@ -1,0 +1,36 @@
+---
+# tasks file for role/install
+# - name: download jenkins.io.key 
+#   shell: |
+#     curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
+#     /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+# - name: Add jenkins entry into repo
+#   shell: |
+#     echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+#     https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+#     /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+
+
+
+# Tasks add jenkins key
+
+# Adding jenkins key
+- name: Add jenkins key
+  apt_key:
+    state: present
+    url: "{{ jenkins_key }}"
+
+- name: Add entry into repository
+  apt_repository:
+    filename: "{{ jenkins.name }}"
+    repo: "{{ jenkins.url }}"
+
+- name: Update repository and install jenkins and java
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  loop: 
+    - openjdk-11-jre-headless
+    - jenkins
