@@ -59,7 +59,7 @@ pipeline {
                 stage("building docker image"){
                     steps{
                         script{
-                            dockerImage = docker.build dockerhub_repo + ":$BUILD_NUMBER"
+                            dockerImage = docker.build dockerhub_repo + ":$GIT_COMMIT-build-$BUILD_NUMBER"
                         }
                     }
                 }
