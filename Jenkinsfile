@@ -80,7 +80,7 @@ pipeline {
                         // withKubeConfig([credentialsId: 'kube-config']){
                         //     sh 'kubectl get all'
                         // }
-                        sh 'kubectl get all'
+                        sh 'kubectl get svc'
                     }
                 }
                 
