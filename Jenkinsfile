@@ -78,6 +78,7 @@ pipeline {
                  stage("Deploying"){
                     steps{
                         withKubeConfig([credentialsId: 'kube-config']){
+                            sh 'pwd'
                             sh 'kubectl get all'
                         }
                     }
