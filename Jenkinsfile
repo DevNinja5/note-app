@@ -43,7 +43,7 @@ pipeline {
     }
 
     options{
-        buildDiscarder(logRotator(numToKeepStr: '5', daysToKeetStr: '5'))
+        buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '5'))
     }
     tools{
         node 'node'
