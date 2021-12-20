@@ -1,0 +1,96 @@
+apiVersion: v1
+data:
+  prometheus.yml: |-
+    global:
+      scrape_interval: 15s 
+      evaluation_interval: 15s 
+    scrape_configs:
+      - job_name: "exporter"
+        static_configs:
+          - targets: ["exporter-prometheus-mongodb-exporter:9216"]
+kind: ConfigMap
+metadata:
+  name: prometheus
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-headless
+spec:
+  selector:
+    app: prometheus
+  clusterIP: None
+  ports:
+    - name: metrics
+      port: 9090
+      targetPort: 9090
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: prometheus
+  replicas: 1
+  serviceName: prometheus-headless
+  template:
+    metadata:
+      name: prometheus-pod
+      labels:
+        app: prometheus
+    spec:
+      terminationGracePeriodSeconds: 15
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: metrics
+              containerPort: 9090
+          volumeMounts:
+            - name: prometheus-config
+              mountPath: /etc/prometheus
+            - name: data
+              mountPath: /prometheus
+      volumes:
+        - name: prometheus-config
+          configMap:
+            name: prometheus
+            items:
+              - key: prometheus.yml
+                path: prometheus.yml
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ReadWriteOnce]
+        storageClassName: minikube-hostpath
+        resources:
+          requests:
+            storage: 400Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tool: grafana
+  template:
+    metadata:
+      name: grafana-pod
+      labels:
+        tool: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
