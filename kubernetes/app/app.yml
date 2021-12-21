@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: note-app
-        image: rahulsoni285/note-app
+        image: rahulsoni285/note-app:${GIT_COMMIT}-build-${BUILD_NUMBER}
         env:
         - name: PORT
           value: "4000"
