@@ -29,8 +29,8 @@ jobs:
     - uses: anchore/sbom-action@v0
       with: 
         image: test-image:latest
-        artifact-name: report
-        output-file: ./
+        artifact-name: report.spdx-json
+        output-file: ./report.spdx-json
 
     - name: cat
       run: |
