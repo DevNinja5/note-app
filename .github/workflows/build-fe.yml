@@ -1,4 +1,4 @@
-name: Build and Deploy Frontend
+name: Build Frontend
 on:
   workflow_dispatch:
     
@@ -25,5 +25,9 @@ jobs:
     - name: Package Frontend
       run: |
         docker build -t test-image .
+
+    - uses: anchore/sbom-action@v0
+      with: 
+        image: test-image:latest
       
 
