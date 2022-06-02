@@ -29,12 +29,13 @@ jobs:
     - uses: anchore/sbom-action@v0
       with: 
         image: test-image:latest
-        output-file: ./report.json
+        artifact-name: report
+        output-file: ./
 
     - name: cat
       run: |
         pwd
         ls
-        cat report.json
+        cat report.spdx-json
       
 
