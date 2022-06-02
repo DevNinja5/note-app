@@ -32,6 +32,6 @@ jobs:
 
     - name: cat
       run: |
-        cat test-image_latest.spdx.json
+        cat /tmp/sbom-action-FxNh25/test-image_latest.spdx.json
       
 
