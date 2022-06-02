@@ -29,5 +29,9 @@ jobs:
     - uses: anchore/sbom-action@v0
       with: 
         image: test-image:latest
+
+    - name: cat
+      run: |
+        cat test-image_latest.spdx.json
       
 
