@@ -1,0 +1,29 @@
+name: Build and Deploy Frontend
+on:
+  workflow_dispatch:
+    
+jobs:
+  buildapp:
+    name: build FE
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+
+    - name: Cache Packages
+      uses: actions/cache@v2
+      with:
+        path: |
+          ui/node_modules
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+
+    - name: Package Frontend
+      run: |
+        docker build -t test-image .
+      
+
