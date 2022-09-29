@@ -1,0 +1,960 @@
+
+==================================================================================
+
+HORUSEC ENDED THE ANALYSIS WITH STATUS OF "success" AND WITH THE FOLLOWING RESULTS:
+
+==================================================================================
+
+Analysis StartedAt: 2022-09-29 17:38:44
+Analysis FinishedAt: 2022-09-29 17:39:05
+
+==================================================================================
+
+Language: Leaks
+Severity: CRITICAL
+Line: 13
+Column: 42
+SecurityTool: HorusecEngine
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/src/libs/createUser.js
+Code: newUser.password = await newUser.encryptPassword("admin");
+RuleID: HS-LEAKS-26
+Type: Vulnerability
+ReferenceHash: 7cb61f7cf7e2a61cc0068dcec4c89263795c20543b0ba2c1fc7f72e7053194b8
+Details: (1/1) * Possible vulnerability detected: Hard-coded password
+The software contains hard-coded credentials, such as a password or cryptographic key, which it uses for its own inbound authentication, outbound communication to external components, or encryption of internal data. For more information checkout the CWE-798 (https://cwe.mitre.org/data/definitions/798.html) advisory.
+
+==================================================================================
+
+Language: JavaScript
+Severity: CRITICAL
+Line: 2650
+Column: 
+SecurityTool: YarnAudit
+Confidence: LOW
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: mpath
+RuleID: 1067718
+Type: Vulnerability
+ReferenceHash: fd0b18dbc704259fe425de77534057b9e0ba8197a2b70d7725e6d894a4e8aff7
+Details: (1/1) * Possible vulnerability detected: This affects the package mpath before 0.8.4. A type confusion vulnerability can lead to a bypass of CVE-2018-16490. In particular, the condition ignoreProperties.indexOf(parts[i]) !== -1 returns -1 if parts[i] is ['__proto__']. This is because the method that has been called if the input is an array is Array.prototype.indexOf() and not String.prototype.indexOf(). They behave differently depending on the type of the input.
+
+==================================================================================
+
+Language: JavaScript
+Severity: CRITICAL
+Line: 2577
+Column: 
+SecurityTool: YarnAudit
+Confidence: LOW
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: minimist
+RuleID: 1067342
+Type: Vulnerability
+ReferenceHash: 331aebecc45e82a9971c46885f4e75bd95d469ebab3c1980e6144d32aa501fb1
+Details: (1/1) * Possible vulnerability detected: Minimist <=1.2.5 is vulnerable to Prototype Pollution via file index.js, function setKey() (lines 69-95).
+
+==================================================================================
+
+Language: Generic
+Severity: CRITICAL
+Line: 1957
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code:     minimist "^1.2.5"
+	Installed Version: "1.2.5"
+	Update to Version: "1.2.6" for fix this issue.
+RuleID: CVE-2021-44906
+Type: Vulnerability
+ReferenceHash: a94cc2d0aea8b5ed0b1970daa661ee535aab59ecb72c32e58a3726b133315d6b
+Details: (1/1) * Possible vulnerability detected: Minimist <=1.2.5 is vulnerable to Prototype Pollution via file index.js, function setKey() (lines 69-95).
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2021-44906.
+Cwe Links: (https://cwe.mitre.org/data/definitions/1321.html)
+
+==================================================================================
+
+Language: Generic
+Severity: CRITICAL
+Line: 2631
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code:     mpath "0.8.3"
+	Installed Version: "0.8.3"
+	Update to Version: "0.8.4" for fix this issue.
+RuleID: CVE-2021-23438
+Type: Vulnerability
+ReferenceHash: 0a54c3eccb7423c0d06d8fba0288da0eceaee04196e99d5ef79e384bf591ca22
+Details: (1/1) * Possible vulnerability detected: This affects the package mpath before 0.8.4. A type confusion vulnerability can lead to a bypass of CVE-2018-16490. In particular, the condition ignoreProperties.indexOf(parts[i]) !== -1 returns -1 if parts[i] is ['__proto__']. This is because the method that has been called if the input is an array is Array.prototype.indexOf() and not String.prototype.indexOf(). They behave differently depending on the type of the input.
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2021-23438.
+Cwe Links: (https://cwe.mitre.org/data/definitions/843.html)
+
+==================================================================================
+
+Language: JavaScript
+Severity: HIGH
+Line: 1682
+Column: 
+SecurityTool: YarnAudit
+Confidence: LOW
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: express-handlebars
+RuleID: 1080906
+Type: Vulnerability
+ReferenceHash: 653e3df8cd1be64542f5a8db98046da105007538da560f17edd8cb228d675955
+Details: (1/1) * Possible vulnerability detected: Express-handlebars is a Handlebars view engine for Express. Express-handlebars mixes pure template data with engine configuration options through the Express render API. More specifically, the layout parameter may trigger file disclosure vulnerabilities in downstream applications. This potential vulnerability is somewhat restricted in that only files with existing extentions (i.e. file.extension) can be included, files that lack an extension will have .handlebars appended to them. For complete details refer to the referenced GHSL-2021-018 report. Notes in documentation have been added to help users avoid this potential information exposure vulnerability.
+
+A fix is discussed in https://github.com/express-handlebars/express-handlebars/pull/163
+
+==================================================================================
+
+Language: Generic
+Severity: HIGH
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/Dockerfile
+Code: root user
+Type: Vulnerability
+ReferenceHash: 2c9ed8f3c58de0cc0eb1ce8ac3d5d88f088eccd69938f4136de73600be6538ec
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.
+      Message: Specify at least 1 USER command in Dockerfile with non-root user as argument
+      Resolution: Add 'USER <non root user name>' line to the Dockerfile
+      References: [https://docs.docker.com/develop/develop-images/dockerfile_best-practices/ https://avd.aquasec.com/appshield/ds002]
+
+==================================================================================
+
+Language: Generic
+Severity: HIGH
+Line: 949
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: ansi-regex@^4.1.0:
+	Installed Version: "4.1.0"
+	Update to Version: "3.0.1, 4.1.1, 5.0.1, 6.0.1" for fix this issue.
+RuleID: CVE-2021-3807
+Type: Vulnerability
+ReferenceHash: 2435ea3313ad627b0e32b4566d67020fe2466f653e86f9aaa40e7b5e662f1df9
+Details: (1/1) * Possible vulnerability detected: ansi-regex is vulnerable to Inefficient Regular Expression Complexity
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2021-3807.
+Cwe Links: (https://cwe.mitre.org/data/definitions/697.html)
+
+==================================================================================
+
+Language: Generic
+Severity: HIGH
+Line: 954
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: ansi-regex@^5.0.0:
+	Installed Version: "5.0.0"
+	Update to Version: "3.0.1, 4.1.1, 5.0.1, 6.0.1" for fix this issue.
+RuleID: CVE-2021-3807
+Type: Vulnerability
+ReferenceHash: 9205227dfb9f641721da1d72af3ace66f027a8358d7a1f1976542aa5519847b1
+Details: (1/1) * Possible vulnerability detected: ansi-regex is vulnerable to Inefficient Regular Expression Complexity
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2021-3807.
+Cwe Links: (https://cwe.mitre.org/data/definitions/697.html)
+
+==================================================================================
+
+Language: Generic
+Severity: HIGH
+Line: 1682
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: express-handlebars@^5.2.1:
+	Installed Version: "5.2.1"
+	Update to Version: "5.3.1" for fix this issue.
+RuleID: CVE-2021-32820
+Type: Vulnerability
+ReferenceHash: 6740a38ab48566b308eff2dc9022d33f6d56bd15577e4c6e77645011e41b2ff2
+Details: (1/1) * Possible vulnerability detected: Express-handlebars is a Handlebars view engine for Express. Express-handlebars mixes pure template data with engine configuration options through the Express render API. More specifically, the layout parameter may trigger file disclosure vulnerabilities in downstream applications. This potential vulnerability is somewhat restricted in that only files with existing extentions (i.e. file.extension) can be included, files that lack an extension will have .handlebars appended to them. For complete details refer to the referenced GHSL-2021-018 report. Notes in documentation have been added to help users avoid this potential information exposure vulnerability.
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2021-32820.
+Cwe Links: (https://cwe.mitre.org/data/definitions/94.html)
+
+==================================================================================
+
+Language: Generic
+Severity: HIGH
+Line: 888
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code:     glob-parent "^3.1.0"
+	Installed Version: "3.1.0"
+	Update to Version: "5.1.2" for fix this issue.
+RuleID: CVE-2020-28469
+Type: Vulnerability
+ReferenceHash: 0df62a4be79dfd5f725b89ea673d4c67d6ed102551aaddc2b69123acac113724
+Details: (1/1) * Possible vulnerability detected: This affects the package glob-parent before 5.1.2. The enclosure regex used to check for strings ending in enclosure containing path separator.
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2020-28469.
+Cwe Links: (https://cwe.mitre.org/data/definitions/400.html)
+
+==================================================================================
+
+Language: Generic
+Severity: HIGH
+Line: 2773
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code:   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
+	Installed Version: "4.5.0"
+	Update to Version: "4.5.1, 6.0.1, 5.3.1" for fix this issue.
+RuleID: CVE-2021-33502
+Type: Vulnerability
+ReferenceHash: 63b0f5a7766fde02f7f99173affd93ca604f72a540ecfc0f99d27629c3916eaf
+Details: (1/1) * Possible vulnerability detected: The normalize-url package before 4.5.1, 5.x before 5.3.1, and 6.x before 6.0.1 for Node.js has a ReDoS (regular expression denial of service) issue because it has exponential performance for data: URLs.
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2021-33502.
+
+==================================================================================
+
+Language: JavaScript
+Severity: MEDIUM
+Line: 2908
+Column: 
+SecurityTool: YarnAudit
+Confidence: LOW
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: passport
+RuleID: 1081673
+Type: Vulnerability
+ReferenceHash: 7b43937aa61995ee9e8f632ce4d554d8af8d5cc7dc2f7b38ece3053b4954406b
+Details: (1/1) * Possible vulnerability detected: This affects the package passport before 0.6.0. When a user logs in or logs out, the session is regenerated instead of being closed.
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/app/app.yml
+Code: Process can elevate its own privileges
+Type: Vulnerability
+ReferenceHash: 17065797744522c8c87b9ce1e141cff3541c8322d9795329e9d75a64bd56059c
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      A program inside the container can elevate its own privileges and run as root, which might give the program control over the container and node.
+      Message: Container 'note-app' of Deployment 'note-app' should set 'securityContext.allowPrivilegeEscalation' to false
+      Resolution: Set 'set containers[].securityContext.allowPrivilegeEscalation' to 'false'.
+      References: [https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted https://avd.aquasec.com/appshield/ksv001]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/app/app.yml
+Code: Runs as root user
+Type: Vulnerability
+ReferenceHash: b8ab1be5c70787b9b4c0792c781b588da6a1010ed76641063239f6b66c5bfd16
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      'runAsNonRoot' forces the running image to run as a non-root user to ensure least privileges.
+      Message: Container 'note-app' of Deployment 'note-app' should set 'securityContext.runAsNonRoot' to true
+      Resolution: Set 'containers[].securityContext.runAsNonRoot' to true.
+      References: [https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted https://avd.aquasec.com/appshield/ksv012]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/app/app.yml
+Code: Runs with low user ID
+Type: Vulnerability
+ReferenceHash: 303a62d1da620a7130741d869b0d1974409e4870c4153f566c41434a1b7473a9
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+      Message: Container 'note-app' of Deployment 'note-app' should set 'securityContext.runAsUser' > 10000
+      Resolution: Set 'containers[].securityContext.runAsUser' to an integer > 10000.
+      References: [https://kubesec.io/basics/containers-securitycontext-runasuser/ https://avd.aquasec.com/appshield/ksv020]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/app/app.yml
+Code: Runs with low group ID
+Type: Vulnerability
+ReferenceHash: 1eb676c8b50fbfb05ebcbadc402fe49112cf00b1edb71459ef3a594ce857fe49
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+      Message: Container 'note-app' of Deployment 'note-app' should set 'securityContext.runAsGroup' > 10000
+      Resolution: Set 'containers[].securityContext.runAsGroup' to an integer > 10000.
+      References: [https://kubesec.io/basics/containers-securitycontext-runasuser/ https://avd.aquasec.com/appshield/ksv021]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: Process can elevate its own privileges
+Type: Vulnerability
+ReferenceHash: 398698f9bc1bfcb90590d4f003ec63239a2e5f85229298857e7f28e728aea8ef
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      A program inside the container can elevate its own privileges and run as root, which might give the program control over the container and node.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should set 'securityContext.allowPrivilegeEscalation' to false
+      Resolution: Set 'set containers[].securityContext.allowPrivilegeEscalation' to 'false'.
+      References: [https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted https://avd.aquasec.com/appshield/ksv001]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: Runs as root user
+Type: Vulnerability
+ReferenceHash: 66a9f124dce343c10fd05f7c6ec072f7cb827e22fe4c573660e28e5bf2df094e
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      'runAsNonRoot' forces the running image to run as a non-root user to ensure least privileges.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should set 'securityContext.runAsNonRoot' to true
+      Resolution: Set 'containers[].securityContext.runAsNonRoot' to true.
+      References: [https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted https://avd.aquasec.com/appshield/ksv012]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: Runs with low user ID
+Type: Vulnerability
+ReferenceHash: 565fc76225200a2c6cf6f86da842a0f2c6361deabbd426df282dfd65afea6f0f
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should set 'securityContext.runAsUser' > 10000
+      Resolution: Set 'containers[].securityContext.runAsUser' to an integer > 10000.
+      References: [https://kubesec.io/basics/containers-securitycontext-runasuser/ https://avd.aquasec.com/appshield/ksv020]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: Runs with low group ID
+Type: Vulnerability
+ReferenceHash: 571971402c9c84fef648327a13e1018e61edee8764df8115ceb33d1db25c8007
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should set 'securityContext.runAsGroup' > 10000
+      Resolution: Set 'containers[].securityContext.runAsGroup' to an integer > 10000.
+      References: [https://kubesec.io/basics/containers-securitycontext-runasuser/ https://avd.aquasec.com/appshield/ksv021]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: Process can elevate its own privileges
+Type: Vulnerability
+ReferenceHash: 548c188818737f855fddd30923606644d8b2d90b0a16a796c371eed713a91701
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      A program inside the container can elevate its own privileges and run as root, which might give the program control over the container and node.
+      Message: Container 'grafana' of Deployment 'grafana' should set 'securityContext.allowPrivilegeEscalation' to false
+      Resolution: Set 'set containers[].securityContext.allowPrivilegeEscalation' to 'false'.
+      References: [https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted https://avd.aquasec.com/appshield/ksv001]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      A program inside the container can elevate its own privileges and run as root, which might give the program control over the container and node.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should set 'securityContext.allowPrivilegeEscalation' to false
+      Resolution: Set 'set containers[].securityContext.allowPrivilegeEscalation' to 'false'.
+      References: [https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted https://avd.aquasec.com/appshield/ksv001]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: Runs as root user
+Type: Vulnerability
+ReferenceHash: 900cd191af4cb22e0eeaef78ad23e9691a2baa2509e93bf0bf8afa9c5ffdc02f
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      'runAsNonRoot' forces the running image to run as a non-root user to ensure least privileges.
+      Message: Container 'grafana' of Deployment 'grafana' should set 'securityContext.runAsNonRoot' to true
+      Resolution: Set 'containers[].securityContext.runAsNonRoot' to true.
+      References: [https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted https://avd.aquasec.com/appshield/ksv012]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      'runAsNonRoot' forces the running image to run as a non-root user to ensure least privileges.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should set 'securityContext.runAsNonRoot' to true
+      Resolution: Set 'containers[].securityContext.runAsNonRoot' to true.
+      References: [https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted https://avd.aquasec.com/appshield/ksv012]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: Runs with low user ID
+Type: Vulnerability
+ReferenceHash: 9cd821bcdebe56a6030389ff4b0407a5ac836820684549f12dac7326cb8ac835
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+      Message: Container 'grafana' of Deployment 'grafana' should set 'securityContext.runAsUser' > 10000
+      Resolution: Set 'containers[].securityContext.runAsUser' to an integer > 10000.
+      References: [https://kubesec.io/basics/containers-securitycontext-runasuser/ https://avd.aquasec.com/appshield/ksv020]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should set 'securityContext.runAsUser' > 10000
+      Resolution: Set 'containers[].securityContext.runAsUser' to an integer > 10000.
+      References: [https://kubesec.io/basics/containers-securitycontext-runasuser/ https://avd.aquasec.com/appshield/ksv020]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: Runs with low group ID
+Type: Vulnerability
+ReferenceHash: ce89c8a4e3d1521393b347c158d23fdfe0bc5bba0fa017c5789ed492eb7e6d3b
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+      Message: Container 'grafana' of Deployment 'grafana' should set 'securityContext.runAsGroup' > 10000
+      Resolution: Set 'containers[].securityContext.runAsGroup' to an integer > 10000.
+      References: [https://kubesec.io/basics/containers-securitycontext-runasuser/ https://avd.aquasec.com/appshield/ksv021]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should set 'securityContext.runAsGroup' > 10000
+      Resolution: Set 'containers[].securityContext.runAsGroup' to an integer > 10000.
+      References: [https://kubesec.io/basics/containers-securitycontext-runasuser/ https://avd.aquasec.com/appshield/ksv021]
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 1189
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: browserslist@^4.14.5, browserslist@^4.16.3:
+	Installed Version: "4.16.3"
+	Update to Version: "4.16.5" for fix this issue.
+RuleID: CVE-2021-23364
+Type: Vulnerability
+ReferenceHash: c18c2fc7fb857633bba75027bafe827a8e031b768992a35bf427570aa3ccea11
+Details: (1/1) * Possible vulnerability detected: The package browserslist from 4.0.0 and before 4.16.5 are vulnerable to Regular Expression Denial of Service (ReDoS) during parsing of queries.
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2021-23364.
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 1930
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: got@^9.6.0:
+	Installed Version: "9.6.0"
+	Update to Version: "11.8.5, 12.1.0" for fix this issue.
+RuleID: CVE-2022-33987
+Type: Vulnerability
+ReferenceHash: b975028f3834bd5fbb15c2f96d3b90b980ecf79329cbfaa40d3ad2547421613b
+Details: (1/1) * Possible vulnerability detected: The got package before 12.1.0 (also fixed in 11.8.5) for Node.js allows a redirect to a UNIX socket.
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2022-33987.
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 2908
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: passport@^0.4.1:
+	Installed Version: "0.4.1"
+	Update to Version: "0.6.0" for fix this issue.
+RuleID: CVE-2022-25896
+Type: Vulnerability
+ReferenceHash: 10f2b2d1f0e2eb55559b371c8b71d8b513b128264b50f07e32a7afcc0b379e26
+Details: (1/1) * Possible vulnerability detected: This affects the package passport before 0.6.0. When a user logs in or logs out, the session is regenerated instead of being closed.
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2022-25896.
+Cwe Links: (https://cwe.mitre.org/data/definitions/384.html)
+
+==================================================================================
+
+Language: Generic
+Severity: MEDIUM
+Line: 2931
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/yarn.lock
+Code: path-parse@^1.0.6:
+	Installed Version: "1.0.6"
+	Update to Version: "1.0.7" for fix this issue.
+RuleID: CVE-2021-23343
+Type: Vulnerability
+ReferenceHash: a6e1093c1c968298acfa46a686eca70275c6658ccef756862e1a69e36058a918
+Details: (1/1) * Possible vulnerability detected: All versions of package path-parse are vulnerable to Regular Expression Denial of Service (ReDoS) via splitDeviceRe, splitTailRe, and splitPathRe regular expressions. ReDoS exhibits polynomial worst-case time complexity.
+PrimaryURL: https://avd.aquasec.com/nvd/cve-2021-23343.
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/app/app.yml
+Code: Default capabilities not dropped
+Type: Vulnerability
+ReferenceHash: 6ef2935aa937ba59e4213a24020987520751f14c345478b24851d81108c29fe2
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      The container should drop all default capabilities and add only those that are needed for its execution.
+      Message: Container 'note-app' of Deployment 'note-app' should add 'ALL' to 'securityContext.capabilities.drop'
+      Resolution: Add 'ALL' to containers[].securityContext.capabilities.drop.
+      References: [https://kubesec.io/basics/containers-securitycontext-capabilities-drop-index-all/ https://avd.aquasec.com/appshield/ksv003]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/app/app.yml
+Code: Image tag ':latest' used
+Type: Vulnerability
+ReferenceHash: 7ceecc3ca9cb6b52f3fe2fddc0f04edfc4ada10012c09d1466899dca8b11720b
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      It is best to avoid using the ':latest' image tag when deploying containers in production. Doing so makes it hard to track which version of the image is running, and hard to roll back the version.
+      Message: Container 'note-app' of Deployment 'note-app' should specify an image tag
+      Resolution: Use a specific container image tag that is not 'latest'.
+      References: [https://kubernetes.io/docs/concepts/configuration/overview/#container-images https://avd.aquasec.com/appshield/ksv013]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/app/app.yml
+Code: Root file system is not read-only
+Type: Vulnerability
+ReferenceHash: 0cafa85e6691277c7e791abb16f760dcb4486dcc13611bd14cf1f71e2a9691cc
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+      Message: Container 'note-app' of Deployment 'note-app' should set 'securityContext.readOnlyRootFilesystem' to true
+      Resolution: Change 'containers[].securityContext.readOnlyRootFilesystem' to 'true'.
+      References: [https://kubesec.io/basics/containers-securitycontext-readonlyrootfilesystem-true/ https://avd.aquasec.com/appshield/ksv014]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/app/app.yml
+Code: CPU requests not specified
+Type: Vulnerability
+ReferenceHash: bb413fa12df889a886599380ddd81b2f66979adf38f408d295123a18a299be54
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      When containers have resource requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+      Message: Container 'note-app' of Deployment 'note-app' should set 'resources.requests.cpu'
+      Resolution: Set 'containers[].resources.requests.cpu'.
+      References: [https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-resource-requests-and-limits https://avd.aquasec.com/appshield/ksv015]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/app/app.yml
+Code: Memory requests not specified
+Type: Vulnerability
+ReferenceHash: bbe83e514cc52182f4c46d7defe25dd93b398e17ff43a014af3c239c097664da
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+      Message: Container 'note-app' of Deployment 'note-app' should set 'resources.requests.memory'
+      Resolution: Set 'containers[].resources.requests.memory'.
+      References: [https://kubesec.io/basics/containers-resources-limits-memory/ https://avd.aquasec.com/appshield/ksv016]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: Default capabilities not dropped
+Type: Vulnerability
+ReferenceHash: a0e17e0589b3c0f4e882ef71702ec2ce7ec0b540710fbf3ab224501bc7e07246
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      The container should drop all default capabilities and add only those that are needed for its execution.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should add 'ALL' to 'securityContext.capabilities.drop'
+      Resolution: Add 'ALL' to containers[].securityContext.capabilities.drop.
+      References: [https://kubesec.io/basics/containers-securitycontext-capabilities-drop-index-all/ https://avd.aquasec.com/appshield/ksv003]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: CPU not limited
+Type: Vulnerability
+ReferenceHash: 12efa00efbddc0fcae6ea563d33938103b1b033f85af596921b90591dabaaf5b
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      Enforcing CPU limits prevents DoS via resource exhaustion.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should set 'resources.limits.cpu'
+      Resolution: Set a limit value under 'containers[].resources.limits.cpu'.
+      References: [https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-resource-requests-and-limits https://avd.aquasec.com/appshield/ksv011]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: Image tag ':latest' used
+Type: Vulnerability
+ReferenceHash: 99d0e44e77918937cdd450e4072e3b37950e4feb989d2b8dcfa1b183719cb50f
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      It is best to avoid using the ':latest' image tag when deploying containers in production. Doing so makes it hard to track which version of the image is running, and hard to roll back the version.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should specify an image tag
+      Resolution: Use a specific container image tag that is not 'latest'.
+      References: [https://kubernetes.io/docs/concepts/configuration/overview/#container-images https://avd.aquasec.com/appshield/ksv013]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: Root file system is not read-only
+Type: Vulnerability
+ReferenceHash: 9c32ca88814011f62b832bd782f16f41c2898746793d0f705494938bba97d8fa
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should set 'securityContext.readOnlyRootFilesystem' to true
+      Resolution: Change 'containers[].securityContext.readOnlyRootFilesystem' to 'true'.
+      References: [https://kubesec.io/basics/containers-securitycontext-readonlyrootfilesystem-true/ https://avd.aquasec.com/appshield/ksv014]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: CPU requests not specified
+Type: Vulnerability
+ReferenceHash: f2c0c790b209ca83fdd9fd770f0d4ce7303f4873a043a30dd699039d47f2ce5f
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      When containers have resource requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should set 'resources.requests.cpu'
+      Resolution: Set 'containers[].resources.requests.cpu'.
+      References: [https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-resource-requests-and-limits https://avd.aquasec.com/appshield/ksv015]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: Memory requests not specified
+Type: Vulnerability
+ReferenceHash: 444981941abf010fc53f928bdb082fe706e7b8a3e20d4edb20fd0529449a13f5
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should set 'resources.requests.memory'
+      Resolution: Set 'containers[].resources.requests.memory'.
+      References: [https://kubesec.io/basics/containers-resources-limits-memory/ https://avd.aquasec.com/appshield/ksv016]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: Memory not limited
+Type: Vulnerability
+ReferenceHash: dbee9cd9b7b5df6bd0be8a73a3785dabaf3293d548ad2d471d0cb47943689840
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      Enforcing memory limits prevents DoS via resource exhaustion.
+      Message: Container 'mongodb' of StatefulSet 'mongodb' should set 'resources.limits.memory'
+      Resolution: Set a limit value under 'containers[].resources.limits.memory'.
+      References: [https://kubesec.io/basics/containers-resources-limits-memory/ https://avd.aquasec.com/appshield/ksv018]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/database/mongo.yml
+Code: A root primary or supplementary GID set
+Type: Vulnerability
+ReferenceHash: bf2622a417db2c78c73bc3e109f4d60c6f683264fd6234f8853ca6516484b77f
+Details: (1/1) * Possible vulnerability detected: MissConfiguration
+      Containers should be forbidden from running with a root primary or supplementary GID.
+      Message: StatefulSet 'mongodb' should set 'spec.securityContext.runAsGroup', 'spec.securityContext.supplementalGroups[*]' and 'spec.securityContext.fsGroup' to integer greater than 0
+      Resolution: Set 'containers[].securityContext.runAsGroup' to a non-zero integer or leave undefined.
+      References: [https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted https://avd.aquasec.com/appshield/ksv029]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: Default capabilities not dropped
+Type: Vulnerability
+ReferenceHash: 26f9bd9ce269a532aa4f1eabb475bf67235d1d5674683355bf996c3345c15898
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      The container should drop all default capabilities and add only those that are needed for its execution.
+      Message: Container 'grafana' of Deployment 'grafana' should add 'ALL' to 'securityContext.capabilities.drop'
+      Resolution: Add 'ALL' to containers[].securityContext.capabilities.drop.
+      References: [https://kubesec.io/basics/containers-securitycontext-capabilities-drop-index-all/ https://avd.aquasec.com/appshield/ksv003]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      The container should drop all default capabilities and add only those that are needed for its execution.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should add 'ALL' to 'securityContext.capabilities.drop'
+      Resolution: Add 'ALL' to containers[].securityContext.capabilities.drop.
+      References: [https://kubesec.io/basics/containers-securitycontext-capabilities-drop-index-all/ https://avd.aquasec.com/appshield/ksv003]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: CPU not limited
+Type: Vulnerability
+ReferenceHash: da575322fe50a18e428bb30763041565339f0eff5afc6c90d4a0032c85a4c75f
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      Enforcing CPU limits prevents DoS via resource exhaustion.
+      Message: Container 'grafana' of Deployment 'grafana' should set 'resources.limits.cpu'
+      Resolution: Set a limit value under 'containers[].resources.limits.cpu'.
+      References: [https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-resource-requests-and-limits https://avd.aquasec.com/appshield/ksv011]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      Enforcing CPU limits prevents DoS via resource exhaustion.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should set 'resources.limits.cpu'
+      Resolution: Set a limit value under 'containers[].resources.limits.cpu'.
+      References: [https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-resource-requests-and-limits https://avd.aquasec.com/appshield/ksv011]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: Image tag ':latest' used
+Type: Vulnerability
+ReferenceHash: 5a9bf5eceb7f8a2eed3b986180d0635eb538cee5ff058f76c4ca8f092ab73a6c
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      It is best to avoid using the ':latest' image tag when deploying containers in production. Doing so makes it hard to track which version of the image is running, and hard to roll back the version.
+      Message: Container 'grafana' of Deployment 'grafana' should specify an image tag
+      Resolution: Use a specific container image tag that is not 'latest'.
+      References: [https://kubernetes.io/docs/concepts/configuration/overview/#container-images https://avd.aquasec.com/appshield/ksv013]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      It is best to avoid using the ':latest' image tag when deploying containers in production. Doing so makes it hard to track which version of the image is running, and hard to roll back the version.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should specify an image tag
+      Resolution: Use a specific container image tag that is not 'latest'.
+      References: [https://kubernetes.io/docs/concepts/configuration/overview/#container-images https://avd.aquasec.com/appshield/ksv013]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: Root file system is not read-only
+Type: Vulnerability
+ReferenceHash: 9df048a2076095520cbfc1e5fff64d033a404ebac3d14ae9d50b304df813c6d0
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+      Message: Container 'grafana' of Deployment 'grafana' should set 'securityContext.readOnlyRootFilesystem' to true
+      Resolution: Change 'containers[].securityContext.readOnlyRootFilesystem' to 'true'.
+      References: [https://kubesec.io/basics/containers-securitycontext-readonlyrootfilesystem-true/ https://avd.aquasec.com/appshield/ksv014]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should set 'securityContext.readOnlyRootFilesystem' to true
+      Resolution: Change 'containers[].securityContext.readOnlyRootFilesystem' to 'true'.
+      References: [https://kubesec.io/basics/containers-securitycontext-readonlyrootfilesystem-true/ https://avd.aquasec.com/appshield/ksv014]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: CPU requests not specified
+Type: Vulnerability
+ReferenceHash: 6699fb0f1643607b8d29adbd51934494f2e389e0b57d6684126eeb08d6e2ad54
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      When containers have resource requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+      Message: Container 'grafana' of Deployment 'grafana' should set 'resources.requests.cpu'
+      Resolution: Set 'containers[].resources.requests.cpu'.
+      References: [https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-resource-requests-and-limits https://avd.aquasec.com/appshield/ksv015]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      When containers have resource requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should set 'resources.requests.cpu'
+      Resolution: Set 'containers[].resources.requests.cpu'.
+      References: [https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-resource-requests-and-limits https://avd.aquasec.com/appshield/ksv015]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: Memory requests not specified
+Type: Vulnerability
+ReferenceHash: 23fa5dc8ef7ce6c7726ec8a526eb48fc409e4fc331fbbd750ef6d2baa84730ff
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+      Message: Container 'grafana' of Deployment 'grafana' should set 'resources.requests.memory'
+      Resolution: Set 'containers[].resources.requests.memory'.
+      References: [https://kubesec.io/basics/containers-resources-limits-memory/ https://avd.aquasec.com/appshield/ksv016]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      When containers have memory requests specified, the scheduler can make better decisions about which nodes to place pods on, and how to deal with resource contention.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should set 'resources.requests.memory'
+      Resolution: Set 'containers[].resources.requests.memory'.
+      References: [https://kubesec.io/basics/containers-resources-limits-memory/ https://avd.aquasec.com/appshield/ksv016]
+
+==================================================================================
+
+Language: Generic
+Severity: LOW
+Line: 0
+Column: 0
+SecurityTool: Trivy
+Confidence: MEDIUM
+File: /home/knoldus/Desktop/note-app/kubernetes/monitor/config.yml
+Code: Memory not limited
+Type: Vulnerability
+ReferenceHash: 2272be228741f76ebe4da139796f8fe8ddacb5f2f791946936de89d63dd3e96c
+Details: (1/2) * Possible vulnerability detected: MissConfiguration
+      Enforcing memory limits prevents DoS via resource exhaustion.
+      Message: Container 'grafana' of Deployment 'grafana' should set 'resources.limits.memory'
+      Resolution: Set a limit value under 'containers[].resources.limits.memory'.
+      References: [https://kubesec.io/basics/containers-resources-limits-memory/ https://avd.aquasec.com/appshield/ksv018]
+         
+(2/2) * Possible vulnerability detected: MissConfiguration
+      Enforcing memory limits prevents DoS via resource exhaustion.
+      Message: Container 'prometheus' of StatefulSet 'prometheus' should set 'resources.limits.memory'
+      Resolution: Set a limit value under 'containers[].resources.limits.memory'.
+      References: [https://kubesec.io/basics/containers-resources-limits-memory/ https://avd.aquasec.com/appshield/ksv018]
+
+==================================================================================
+
+In this analysis, a total of 49 possible vulnerabilities were found and we classified them into:
+Total of Vulnerability HIGH is: 7
+Total of Vulnerability MEDIUM is: 17
+Total of Vulnerability LOW is: 20
+Total of Vulnerability CRITICAL is: 5

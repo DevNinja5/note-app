@@ -1,0 +1,32 @@
+on: pull_request
+
+jobs:
+  checking_code:
+    runs-on: ubuntu-latest
+    name: Horusec Scan
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run Horusec
+        env:
+          WORKING_DIR: ./
+          AUTHOR: rahul.soni@knoldus.com
+          HORUSEC_CLI_RETURN_ERROR_IF_FOUND_VULNERABILITY: "false"
+        id: run_horusec
+        uses: fike/horusec-action@v0.2.2
+        with:
+          arguments: -p ./--config-file-path=horusec-config.json
+
+
+  
+      - name: output
+        run: |-
+          export MESSAGE=$(cat report.txt | grep "Total of Vul")
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: |
+            $MESSAGE
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
