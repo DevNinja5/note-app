@@ -5,8 +5,8 @@ HORUSEC ENDED THE ANALYSIS WITH STATUS OF "success" AND WITH THE FOLLOWING RESUL
 
 ==================================================================================
 
-Analysis StartedAt: 2022-09-29 17:38:44
-Analysis FinishedAt: 2022-09-29 17:39:05
+Analysis StartedAt: 2022-09-29 19:29:34
+Analysis FinishedAt: 2022-09-29 19:30:52
 
 ==================================================================================
 
@@ -954,7 +954,7 @@ Details: (1/2) * Possible vulnerability detected: MissConfiguration
 ==================================================================================
 
 In this analysis, a total of 49 possible vulnerabilities were found and we classified them into:
-Total of Vulnerability HIGH is: 7
-Total of Vulnerability MEDIUM is: 17
 Total of Vulnerability LOW is: 20
 Total of Vulnerability CRITICAL is: 5
+Total of Vulnerability HIGH is: 7
+Total of Vulnerability MEDIUM is: 17
